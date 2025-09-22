@@ -131,7 +131,7 @@ public class Pantalla extends JPanel implements KeyListener, ActionListener {
         }
         for(int j=1;j<tam;j++)
         {
-            //valida la colision con su propio cuerpo
+            //valida la colision con su propio cuerpo            
           if((this.snakexlength[j]==this.snakexlength[0])&&(this.snakeylength[j]==this.snakeylength[0])){
             this.movimientos[0]=this.movimientos[1]=this.movimientos[2]=this.movimientos[3]=false;
             g.setColor(Color.WHITE);
