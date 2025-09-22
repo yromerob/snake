@@ -129,6 +129,16 @@ public class Pantalla extends JPanel implements KeyListener, ActionListener {
            posx=r.nextInt(enemigosposx.length);
            posy=r.nextInt(enemigosposy.length);
         }
+        for(int j=1;j<tam;j++)
+        {
+            //valida la colision con su propio cuerpo
+          if((this.snakexlength[j]==this.snakexlength[0])&&(this.snakeylength[j]==this.snakeylength[0])){
+            this.movimientos[0]=this.movimientos[1]=this.movimientos[2]=this.movimientos[3]=false;
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("arial",Font.BOLD,50));
+            g.drawString("Fin de Juego! :(", 350, 350);
+          }
+        }
         g.dispose();
     }
 
@@ -139,8 +149,10 @@ public class Pantalla extends JPanel implements KeyListener, ActionListener {
         //Los movimientos del array seran determinados de la siguiente forma 0 izquierda, 1 derecha, 2 arriba, 3 abajo
         for(int j=0;j<this.movimientos.length;j++)        
         {
-           if(this.movimientos[j]){
-            switch(j){
+           if(this.movimientos[j])
+           {
+            switch(j)
+            {
                 case 0://Izquierda
                     for (int i = tam - 1; i >= 0; i--) {
                         this.snakeylength[i + 1] = this.snakeylength[i];
@@ -195,7 +207,7 @@ public class Pantalla extends JPanel implements KeyListener, ActionListener {
                         break;
 
                 }
-
+               j=this.movimientos.length; //para romper el ciclo for
             }
         }
       
@@ -255,10 +267,16 @@ public class Pantalla extends JPanel implements KeyListener, ActionListener {
                 movimientos[0] = false;//Izquierda
                 movimientos[1] = false;//Derecha
                 break;
-            case KeyEvent.VK_SPACE://PAUSAR O REANUDAR EL JUEGO
+            case KeyEvent.VK_SPACE://FIN DEL JUEGO
+                mov = 0;
+                tam = 3;
+                score = 0;
+                repaint();
+                break;  
+              case KeyEvent.VK_ENTER://PAUSAR O REANUDAR EL JUEGO
                 if (this.tiempo.isRunning()){this.tiempo.stop();}
                 else{this.tiempo.start();}
-                break;     
+                break;   
 
         }
      
